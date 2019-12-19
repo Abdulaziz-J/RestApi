@@ -13,7 +13,7 @@
         <thead>
             <tr>
               <th>Trainer name</th>
-              <th># of Trainees</th>
+              <th>Number of Trainees</th>
               
             </tr>
         </thead>

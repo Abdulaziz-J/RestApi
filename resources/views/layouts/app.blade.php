@@ -14,7 +14,7 @@
     <script  src="https://code.jquery.com/jquery-3.4.1.min.js"  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -44,7 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <a class="navbar-brand" href="{{route('lessons.index')}}">Lessons</a>
-                        <a class="navbar-brand" href="{{route('lockers.index')}}">Lockers</a>  
+                        <a class="navbar-brand" href="{{route('lockers.index')}}">Lockers</a>
                         <a class="navbar-brand" href="{{route('trainees.index')}}">Trainees</a>
                         <a class="navbar-brand" href="{{route('trainers.index')}}">Trainers</a>
 
@@ -59,7 +59,7 @@
                        @endif
                        @endif
 
-                       
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
@@ -97,7 +97,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  
+
                                 </div>
                             </li>
                         @endguest
@@ -108,7 +108,7 @@
 
         <main class="py-4">
             @yield('content')
-            
+
         </main>
     </div>
 </body>
@@ -144,7 +144,6 @@
 
 
 
- 
 
-   
- 
+
+

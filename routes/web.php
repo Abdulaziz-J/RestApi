@@ -56,6 +56,7 @@ Route::resource('home','HomeController');
 
 Route::get('/quote', 'ApiController@index');
 
+Route::post('/like', 'LikeController@update');
 
 
 
