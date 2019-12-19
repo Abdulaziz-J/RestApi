@@ -10,9 +10,10 @@ class LessonController extends Controller
 {
     protected $quote;
 
-    
+
     public function __construct(Quote $quote){
         $this->quote = $quote;
+
     }
 
     /**
@@ -24,8 +25,8 @@ class LessonController extends Controller
     {
         $lessons = Lesson::all();
         return view('lessons.index', ['lessons' => $lessons, 'quote'=> $this->quote->fetchQuote()]);
-        
-        
+
+
     }
 
     /**
@@ -79,7 +80,7 @@ class LessonController extends Controller
 
         if(!$lesson->trainees->contains($trainee_id))
             $lesson->trainees()->attach($trainee_id);
-       
+
         return redirect()->route('lessons.index');
 
     }
@@ -90,7 +91,7 @@ class LessonController extends Controller
 
         if($lesson->trainees->contains($trainee_id))
             $lesson->trainees()->detach($trainee_id);
-       
+
         return redirect()->route('lessons.index');
 
     }
@@ -165,5 +166,5 @@ class LessonController extends Controller
         $lessos->delete();
         return redirect()->route('lessons.index')->with('message', 'Lesson has deleted');
     }
-    
+
 }
