@@ -7,12 +7,12 @@
     @csrf
     <p>Name: <input type="text" name="name" 
     value="{{ old('name') }}"></p>
-    <p>Description: <textarea name="description" ></textarea
-    value="{{ old('name') }}"></p>
+    <p>Description: <textarea name="description" >{{ old('description') }}</textarea
+    ></p>
     <p>Day: <input type="text" name="day" 
-    value="{{ old('name') }}"></p>
+    value="{{ old('day') }}"></p>
     <p>Date: <input type="date" name="date" 
-    value="{{ old('name') }}"></p>
+    value="{{ old('date') }}"></p>
     <p>Date: <input type="file" name="image" 
         value=""></p>
         

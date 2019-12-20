@@ -24,7 +24,7 @@
          <th>Days</th>
          <th>Data</th>
          @if (auth()->user()->type == 'trainer')
-            <th>Action</th>
+        <th><a href="{{ route('lessons.create')}}" class="btn btn-primary pull-right">+</a></th>
          @endif
          @if (auth()->user()->type == 'trainee')
          <th>Enrollemnt</th>
@@ -35,7 +35,13 @@
        <tbody>
         @foreach ($lessons as $lesson)
         <tr>
-         <td>{{ $lesson->name }}</td>
+         <td>
+             {{ $lesson->name }}
+            @if($lesson->user)
+            <br/>
+         <label>by: {{ $lesson->user->name }}</label>
+         @endif
+        </td>
          <td><img src="/images/{{$lesson->image}}" alt="img" style="width:70px"/></td>
         <td>{{$lesson->trainees()->count()}}</td>
          <td>{{ $lesson->description }}</td>

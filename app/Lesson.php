@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
-
+  protected $fillable = ['name', 'description', 'day', 'date'];
     public function trainees()
     {
 
@@ -14,6 +14,10 @@ class Lesson extends Model
 
     }
 
+    public function user() {
+      return $this->belongsTo(User::class);
+    }
+    
     public function comments()
     {
 

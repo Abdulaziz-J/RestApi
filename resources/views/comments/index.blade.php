@@ -181,8 +181,6 @@
                                     }
                                 });
                             });
-
-                            console.log('Page loaded');
                             $('#comment_form').on('submit', function (e) {
 
                                 e.preventDefault();
@@ -201,6 +199,9 @@
                                     dataType: 'JSON',
                                     success: function (data) {
                                         alert(data.data);
+                                    },
+                                    error: function (data, e) {
+                                       alert('Error : ' + data.responseJSON.errors.content[0]);
                                     }
                                 });
 

@@ -23,7 +23,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $lessons = Lesson::all();
+        $lessons = Lesson::with('user')->get();
         return view('lessons.index', ['lessons' => $lessons, 'quote'=> $this->quote->fetchQuote()]);
 
 
@@ -49,28 +49,22 @@ class LessonController extends Controller
     {
         $validatedDate = $request->validate([
             'name' => 'required|max:15',
-            'title' => 'required|max:20',
             'description' => 'required|max:50',
+            'day' => 'required',
+            'date' => 'required'
         ]);
-
-        $post = $request->all();
-        //dd($post);
-
+        
+        $lesson = Lesson::create($request->all());
+        $lesson->user_id = auth()->user()->id;
+        $lesson->save();
+        
         $image_name = "";
         if(request('image')){
-        $image_name = time() . '.'  .request()->image->getClientOriginalExtension();
+            $image_name = time() . '.'  .request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images'), $image_name);
-
+            $lesson->image = $image_name;
+            $lesson->save();
         }
-
-
-
-        $comment =new Lesson();
-        $comment->name = $post['name'];
-        $comment->image = $image_name;
-        $comment->title = $post['title'];
-        $comment->description = $post['description'];
-        $comment->save();
         return redirect()->route('lessons.index')->with('message', 'Lesson has been created');
     }
 
@@ -135,20 +129,22 @@ class LessonController extends Controller
         ]);
 
         $post = $request->all(); //new comment
-        $image_name = "";
-        if(request('image')){
-        $image_name = time() . '.'  .request()->image->getClientOriginalExtension();
-            request()->image->move(public_path('images'), $image_name);
-
-        }
-
-        $lesson = Lesson::find($post['id']); //it's the current comment
-
+        
+        $lesson = Lesson::findOrFail($post['id']); //it's the current comment
         $lesson->name = $post['name'];
-        $lesson->image = $image_name;
         $lesson->description = $post['description'];
         $lesson->day = $post['day'];
         $lesson->date = $post['date'];
+        if (!$lesson->user_id) {
+            $lesson->user_id = auth()->user()->id;
+        }
+
+        if(request('image')){
+            $image_name = time() . '.'  .request()->image->getClientOriginalExtension();
+            request()->image->move(public_path('images'), $image_name);
+            $lesson->image = $image_name;
+        }
+
         $lesson->save();
 
         return redirect()->to("/lessons");

@@ -5,7 +5,7 @@ use \GuzzleHttp\Client;
 
 class Quote{
 
-    protected $client; 
+    protected $client;
 
     public function __construct(){
         $key = config('services.paperquote.key');
@@ -14,12 +14,12 @@ class Quote{
 
     public function fetchQuote($lang = 'en'){
 
-       
+
         $url = config('services.paperquote.endpoint');
-       
+
        // $this->client->setDefaultOption();
         $request = $this->client->get($url . '?lang='. $lang);
-        
+
         $response = $request->getBody();
 
         return json_decode($response);

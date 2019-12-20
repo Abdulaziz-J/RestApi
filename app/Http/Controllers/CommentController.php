@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Comment;
+use App\Http\Requests\CommentRequest;
 use App\Lesson;
 use App\Trainee;
 use Illuminate\Http\Request;
@@ -30,14 +31,14 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($lessonId)
+    public function create(CommentRequest $request, $lessonId)
     {
         //return view('comments.create');
 
         $lesson = \App\Lesson::findOrFail($lessonId);
         $user_id = auth()->user()->id;
         $content = request('content');
-       
+
         $image_name = "";
         if(request('image')){
         $image_name = time() . '.'  .request()->image->getClientOriginalExtension();
@@ -125,7 +126,7 @@ class CommentController extends Controller
        // dd($comment);
 
         return view('comments.edit', ['comment' => $comment]);
-  
+
     }
 
     /**
@@ -140,16 +141,16 @@ class CommentController extends Controller
         $validatedDate = $request->validate([
          //   'image' => 'required|max:15',
 
-            'content' => 'required|max:50'
+            'content' => 'required|max:30'
         ]);
 
         $post = $request->all();
 
-        
+
         $image_name = "";
         if(request('image')){
 
-        
+
         $image_name = time() . '.'  .request()->image->getClientOriginalExtension();
         request()->image->move(public_path('images'), $image_name);
 
@@ -187,7 +188,7 @@ class CommentController extends Controller
         }
 
         $comments->delete();
-       
+
         return redirect()->to("/lessons/$comments->lesson_id/comments");
     }
 }
